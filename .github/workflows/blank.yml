@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@main
         with:
           # 明确包含.well-known目录
           path: |
@@ -32,4 +32,4 @@ jobs:
             !.well-known/**
           
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@main
