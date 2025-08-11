@@ -18,15 +18,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # 确保检出所有文件，包括点文件和.well-known目录
-          fetch-depth: 0
+          fetch-depth: 0  # 确保检出所有文件
+
+      - name: Rename well-known to .well-known (if needed)
+        run: |
+          if [ -d "well-known" ]; then
+            mv well-known .well-known
+            echo "Renamed well-known to .well-known"
+          else
+            echo "Directory 'well-known' not found, skipping rename."
+          fi
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@main
+        uses: actions/upload-pages-artifact@v2
         with:
-          # 明确包含.well-known目录
-          path: |
-            .well-known
-          
+          path: "."  # 上传整个仓库（包括 .well-known）
+
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@main
+        uses: actions/deploy-pages@v2
