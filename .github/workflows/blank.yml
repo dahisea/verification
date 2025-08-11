@@ -5,8 +5,8 @@ on:
     branches: [ "main" ]
 
 permissions:
-     pages: write
-     id-token: write
+  pages: write
+  id-token: write
 
 concurrency: 
   group: "deploy"
@@ -16,10 +16,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-        
-      - uses: actions/upload-pages-artifact@main
+      - uses: actions/checkout@v4
         with:
-          path: '.'
+          # 确保检出所有文件，包括点文件和.well-known目录
+          fetch-depth: 0
 
-      - uses: actions/deploy-pages@main
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          # 明确包含.well-known目录
+          path: |
+            .
+            !.git
+            !.github
+            !.well-known/**
+          
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
