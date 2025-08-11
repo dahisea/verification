@@ -26,10 +26,7 @@ jobs:
         with:
           # 明确包含.well-known目录
           path: |
-            .
-            !.git
-            !.github
-            !.well-known
+            .well-known
           
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@main
