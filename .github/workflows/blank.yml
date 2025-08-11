@@ -30,7 +30,7 @@ jobs:
           fi
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@main
+        uses: dahisea/upload-pages-artifact@main
         with:
           path: "."  # 上传整个仓库（包括 .well-known）
 
